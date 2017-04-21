@@ -1,3 +1,32 @@
+# Higher order functions
+
+```
+var paint = function(original, replacement, source) {
+  return function(source) {
+    return source.replace(original, replacement);
+  };
+};
+ 
+var makeWhite = paint("Black", "White");
+var makeBlack = paint("White", "Black");
+ 
+console.log(makeWhite("Color is Black"));
+console.log(makeBlack("Color is White"));
+```
+# Curring
+```
+var feed = function(food) {
+  return function(pet) {
+    console.log( `${ pet} eats ${ food}`);
+  };
+};
+
+var doFeed = feed("meat");
+
+doFeed("Dog");
+doFeed("Cat");
+feed("apple")("Horse"); 
+```
 # Classes
 ```
 class Animal {
