@@ -158,39 +158,37 @@ function run() {
 
 #  Chain of Responsibility
 ```
-function CustomerPrototype(proto) {
-    this.proto = proto;
- 
-    this.clone = function () {
-        var customer = new Customer();
- 
-        customer.first = proto.first;
-        customer.last = proto.last;
-        customer.status = proto.status;
- 
-        return customer;
-    };
+var Request = function(amount) {
+    this.amount = amount;
+    log.add("Requested: $" + amount + "\n");
 }
  
-function Customer(first, last, status) {
- 
-    this.first = first;
-    this.last = last;
-    this.status = status;
- 
-    this.say = function () {
-        alert("name: " + this.first + " " + this.last +
-              ", status: " + this.status);
-    };
+Request.prototype = {
+    get: function(bill) {
+        var count = Math.floor(this.amount / bill);
+        this.amount -= count * bill;
+        log.add("Dispense " + count + " $" + bill + " bills");
+        return this;
+    }
 }
+ 
+// log helper 
+ 
+var log = (function() {
+    var log = "";
+ 
+    return {
+        add: function(msg) { log += msg + "\n"; },
+        show: function() { alert(log); log = ""; }
+    }
+})();
  
 function run() {
+    var request = new Request(378);
  
-    var proto = new Customer("n/a", "n/a", "pending");
-    var prototype = new CustomerPrototype(proto);
+    request.get(100).get(50).get(20).get(10).get(5).get(1);
  
-    var customer = prototype.clone();
-    customer.say();
+    log.show();
 }
 ```
 
@@ -202,14 +200,15 @@ function run() {
 Написати массив даних, який буде повертатись промісом якщо висота скріну (screen ) більше 1000, і помилку, якщо менше
 
 ## 3.
-Реалізувати "гаманець" ( можна додавати і віднімати гроші) за допомогою Chain of Responsibility
+Створити юзера, в локалсторедж, і діставати його в аплікуху за допомогою паттерну Singleton
+
 
 # Homework
 ## 1
 Створіть батьківський клас Product, який буде приймати 2 аргументи (назва і ціна). Усередині класу зробіть перевірку на випадок якщо ціна буде нижче 0 в повідомленні виведіть ім'я товару і оповіщення про те що товар (ім'я товару) не можна створювати з негативною ціною. Також створіть 2 підкласи - Food і Toy які будуть наслідувати клас продукту, а також мати власну властивість (їжа та іграшка).
 
 ## 2 
-Створити юзера, в локалсторедж, і діставати його в аплікуху за допомогою паттерну Singleton
+Реалізувати "гаманець" ( можна додавати і віднімати гроші) за допомогою Chain of Responsibility
 
 ## 3 
  
