@@ -127,3 +127,51 @@ promise.then(function(result) {
 });
 ```
 
+# Singleton
+```
+var Singleton = (function () {
+    var instance;
+ 
+    function createInstance() {
+        var object = new Object("I am the instance");
+        return object;
+    }
+ 
+    return {
+        getInstance: function () {
+            if (!instance) {
+                instance = createInstance();
+            }
+            return instance;
+        }
+    };
+})();
+ 
+function run() {
+ 
+    var instance1 = Singleton.getInstance();
+    var instance2 = Singleton.getInstance();
+ 
+    alert("Same instance? " + (instance1 === instance2));  
+}
+```
+
+# Tasks
+## 1.
+Реалізувати, функцію, яка буде до вхідного числа додавати 10.
+
+## 2.
+Написати массив даних, який буде повертатись промісом якщо висота скріну (screen ) більше 1000, і помилку, якщо менше
+
+## 3.
+
+
+# Homework
+## 1
+Створіть батьківський клас Product, який буде приймати 2 аргументи (назва і ціна). Усередині класу зробіть перевірку на випадок якщо ціна буде нижче 0 в повідомленні виведіть ім'я товару і оповіщення про те що товар (ім'я товару) не можна створювати з негативною ціною. Також створіть 2 підкласи - Food і Toy які будуть наслідувати клас продукту, а також мати власну властивість (їжа та іграшка).
+
+## 2 
+Створити юзера, в локалсторедж, і діставати його в аплікуху за допомогою паттерну Singleton
+
+## 3 
+
